@@ -16,6 +16,7 @@ namespace Swordtress
         public override void Start()
         {
             ItemBuilder.Init();
+            PushTest.Init();
             Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
         }
 
