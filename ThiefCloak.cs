@@ -49,7 +49,7 @@ namespace Swordtress
         }
         IEnumerator WaitaSec(PlayerController player)
         {
-
+            player.OnDidUnstealthyAction += this.BreakStealth;
             yield return new WaitForSecondsRealtime(5);
             BreakStealth(player);
         }
