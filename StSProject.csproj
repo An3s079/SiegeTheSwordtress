@@ -94,9 +94,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ItemAPI\ResourceExtractor.cs" />
     <Compile Include="ItemAPI\SpriteBuilder.cs" />
+    <Compile Include="ThiefCloak.cs" />
+    <Compile Include="ToolBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\example_item_sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThiefCloak.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
