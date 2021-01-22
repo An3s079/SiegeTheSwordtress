@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using MonoMod.RuntimeDetour;
+using System.Reflection;
 
 namespace Swordtress
 {
@@ -17,6 +19,7 @@ namespace Swordtress
         {
             ItemBuilder.Init();
             ThiefCloak.Init();
+            ThrowingKnives.Add();
 
             Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
         }

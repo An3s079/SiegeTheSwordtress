@@ -17,9 +17,8 @@ namespace Swordtress
             GameObject obj = new GameObject(itemName);
             var item = obj.AddComponent<ThiefCloak>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "[TODO].";
-            string longDesc = "[TODO].\n\n" +
-                "[TODO]..";
+            string shortDesc = "Into the Shadows.";
+            string longDesc = "Upon entering a room full of enemies you are given a brief moment of time to position yourself.\n\n";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 1);
             item.quality = PickupObject.ItemQuality.EXCLUDED;
