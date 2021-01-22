@@ -28,7 +28,7 @@ namespace Swordtress
             gun.reloadTime = 1.1f;
             gun.DefaultModule.cooldownTime = 0.3f;
             gun.DefaultModule.numberOfShotsInClip = int.MaxValue;
-            gun.SetBaseMaxAmmo(75);
+            gun.SetBaseMaxAmmo(300);
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "haha throw go brrrrrr in mod thats not supposed to be about swords.";
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -37,7 +37,7 @@ namespace Swordtress
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             gun.barrelOffset.transform.localPosition = new Vector3(0f, 0f, 0f);
-            projectile.baseData.damage = 4f;
+            projectile.baseData.damage = 5f;
             projectile.baseData.speed *= 1f;
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSpriteRight("throwingknives_projectile_001", 15, 10, null, null);
