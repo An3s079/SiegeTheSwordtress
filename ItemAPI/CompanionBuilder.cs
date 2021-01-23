@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-
-using UnityEngine;
 using MonoMod.RuntimeDetour;
+using UnityEngine;
 using DirectionType = DirectionalAnimation.DirectionType;
 using FlipType = DirectionalAnimation.FlipType;
 
@@ -118,12 +117,12 @@ namespace ItemAPI
         }
 
         public enum AnimationType { Move, Idle, Fidget, Flight, Hit, Talk, Other }
-        public static tk2dSpriteAnimationClip AddAnimation(this GameObject obj, string name, string spriteDirectory, int fps, 
+        public static tk2dSpriteAnimationClip AddAnimation(this GameObject obj, string name, string spriteDirectory, int fps,
             AnimationType type, DirectionType directionType = DirectionType.None, FlipType flipType = FlipType.None)
         {
             AIAnimator aiAnimator = obj.GetOrAddComponent<AIAnimator>();
             DirectionalAnimation animation = aiAnimator.GetDirectionalAnimation(name, directionType, type);
-            if(animation == null)
+            if (animation == null)
             {
                 animation = new DirectionalAnimation()
                 {

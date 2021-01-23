@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
-
-using UnityEngine;
+using System.Text;
 using MonoMod.RuntimeDetour;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace ItemAPI

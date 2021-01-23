@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using System.Diagnostics;
-using System.Reflection;
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using MonoMod.RuntimeDetour;
+using UnityEngine;
 
 namespace ItemAPI
 {
