@@ -1,5 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <LibPath Condition="'$(LibPath)' == ''">$(MSBuildThisFileDirectory)lib\</LibPath>
-  </PropertyGroup>
-</Project>
