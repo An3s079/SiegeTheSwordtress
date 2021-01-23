@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
-using Gungeon;
-using UnityEngine;
 using Dungeonator;
+using Gungeon;
+using ItemAPI;
+using UnityEngine;
 
 namespace Swordtress
 {
@@ -49,12 +49,13 @@ namespace Swordtress
                 }
             }
         }
-        
+
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.OnEnteredCombat = (Action)Delegate.Combine(player.OnEnteredCombat, new Action(TestForBoss));
         }
+
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);

@@ -1,11 +1,5 @@
-﻿using ItemAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using MonoMod.RuntimeDetour;
-using System.Reflection;
+﻿using System;
+using ItemAPI;
 
 namespace Swordtress
 {
@@ -35,7 +29,7 @@ namespace Swordtress
 
         }
 
-        public static void Log(string text, string color="#FFFFFF")
+        public static void Log(string text, string color = "#FFFFFF")
         {
             ETGModConsole.Log($"<color={color}>{text}</color>");
         }
