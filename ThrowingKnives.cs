@@ -16,7 +16,7 @@ namespace Swordtress
             Game.Items.Rename("outdated_gun_mods:throwing_knives", "sts:throwing_knives");
             gun.gameObject.AddComponent<ThrowingKnives>();
             gun.SetShortDescription("precision needed.");
-            gun.SetLongDescription("Although this weapon is a knife, it is thrown as a projectile. Projectiles, anger the dulled.");
+            gun.SetLongDescription("Although this weapon is a knife, it is thrown as a projectile, and projectiles anger the dulled.");
             gun.SetupSprite(null, "throwingknives_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.AddProjectileModuleFrom("ak-47", true, false);

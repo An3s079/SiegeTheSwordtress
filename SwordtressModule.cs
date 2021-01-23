@@ -17,11 +17,22 @@ namespace Swordtress
 
         public override void Start()
         {
-            ItemBuilder.Init();
-            ThiefCloak.Init();
-            ThrowingKnives.Add();
+            try
+            {
+                ItemBuilder.Init();
+                ThiefCloak.Init();
+                ThrowingKnives.Add();
+                ThiefBomb.Init();
+                SecondWind.Init();
 
-            Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
+                Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
+
         }
 
         public static void Log(string text, string color="#FFFFFF")

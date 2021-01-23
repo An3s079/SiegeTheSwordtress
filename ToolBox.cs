@@ -6,11 +6,16 @@ using UnityEngine;
 
 namespace Swordtress
 {
-    class ToolBox
+    public static class ToolBox
     {
+        public static void AddPassiveStatModifier(this Gun gun, PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod modifyMethod)
+        {
+            gun.passiveStatModifiers = gun.passiveStatModifiers.Concat(new StatModifier[] { new StatModifier { statToBoost = statType, amount = amount, modifyType = modifyMethod } }).ToArray();
+        }
     }
     public static class AlterItemStats
     {
+
         public static void AddStatToPassive(PassiveItem item, PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
             StatModifier modifier = new StatModifier
