@@ -1,5 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup Label="Mod Properties">
+    <GenerateModMetadata>true</GenerateModMetadata>
+    <ModName>Siege the Swordtress</ModName>
+    <ModVersion>1.0.0</ModVersion>
+    <ModAuthor>Siege the Swordtress Team</ModAuthor>
+  </PropertyGroup>
+
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
   </PropertyGroup>

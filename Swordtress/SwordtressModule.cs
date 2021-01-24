@@ -5,8 +5,6 @@ namespace Swordtress
 {
     public class SwordtressModule : ETGModule
     {
-        public static readonly string MOD_NAME = "Siege The Swordtress";
-        public static readonly string VERSION = "1.0.0";
         public static readonly string TEXT_COLOR = "#00FFFF";
 
         public override void Start()
@@ -19,7 +17,7 @@ namespace Swordtress
                 ThiefBomb.Init();
                 SecondWind.Init();
 
-                Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
+                Log($"{SwordtressAssembly.ModName} v{SwordtressAssembly.Version} started successfully.", TEXT_COLOR);
             }
             catch (Exception e)
             {
