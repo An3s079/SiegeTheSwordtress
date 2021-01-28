@@ -25,6 +25,7 @@ namespace Swordtress
                 ThiefBomb.Init();
                 SecondWind.Init();
                 Bladelust.Init();
+                SharpenedGrindstone.Init();
                 Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
             }
             catch (Exception e)
