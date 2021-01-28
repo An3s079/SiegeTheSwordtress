@@ -14,7 +14,7 @@ namespace Swordtress
         {
             string itemName = "Grindstone";
 
-            string resourceName = "Swordtress/Resources/gtindstone.png";
+            string resourceName = "Swordtress/Resources/grindstone.png";
 
             GameObject obj = new GameObject(itemName);
 
