@@ -26,6 +26,11 @@ namespace Swordtress
                 SecondWind.Init();
                 Bladelust.Init();
                 SharpenedGrindstone.Init();
+                CatsCowl.Init();
+                CritItem.Init();
+                BookOfParrying.Init();
+                Katana.Add();
+                RoyalGuardsKnife.Add();
                 Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
             }
             catch (Exception e)

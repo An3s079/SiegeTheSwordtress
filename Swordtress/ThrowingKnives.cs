@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Gungeon;
 using ItemAPI;
 using UnityEngine;
+using Gungeon;
 
 namespace Swordtress
 {
