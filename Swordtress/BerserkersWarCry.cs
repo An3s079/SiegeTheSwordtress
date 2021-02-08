@@ -15,7 +15,6 @@ namespace Swordtress
     {
         public static int Init()
         {
-            System.Random rand = new System.Random();
             string itemName = "Berserkers war cry";
             string resourceName = "Swordtress/Resources/angryVikingMan.png";
             GameObject obj = new GameObject(itemName);
