@@ -55,7 +55,7 @@ namespace Swordtress
                 string text = "";
                 Notify(header, text);
                 SwordtressModule.activateStS();
-                                SwordtressModule.SwordtressModeActive = true;
+                SwordtressModule.SwordtressModeActive = true;
             }
         }
         private static void Notify(string header, string text)
