@@ -1,9 +1,7 @@
-﻿using ItemAPI;
+﻿//using GungeonAPI;
+using ItemAPI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -19,7 +17,9 @@ namespace Swordtress
         {
             try
             {
+                //ShrineFactory.Init();
                 ItemBuilder.Init();
+                //items
                 ThiefCloak.Init();
                 ThrowingKnives.Add();
                 ThiefBomb.Init();
@@ -29,8 +29,16 @@ namespace Swordtress
                 CatsCowl.Init();
                 CritItem.Init();
                 BookOfParrying.Init();
+                BerserkersWarCry.Init();
+                RoseCharm.Init(); //this item will maybe be really bad but we will see.
+
+                //weapons
                 Katana.Add();
                 RoyalGuardsKnife.Add();
+
+
+                //SwordtressBreachShrine.Add();
+                //ShrineFactory.PlaceBreachShrines();
                 Log($"{MOD_NAME} v{VERSION} started successfully.", TEXT_COLOR);
             }
             catch (Exception e)
@@ -40,12 +48,10 @@ namespace Swordtress
             }
 
         }
-
         public static void Log(string text, string color="#FFFFFF")
         {
             ETGModConsole.Log($"<color={color}>{text}</color>");
         }
-
         public override void Exit() { }
         public override void Init() { }
     }
