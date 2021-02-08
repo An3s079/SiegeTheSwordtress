@@ -10,27 +10,21 @@ namespace Swordtress
 {
     class SharpenedGrindstone : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "Grindstone";
-
             string resourceName = "Swordtress/Resources/grindstone.png";
-
             GameObject obj = new GameObject(itemName);
-
             var item = obj.AddComponent<SharpenedGrindstone>();
-
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
             string shortDesc = "Only A Bit Overkill";
             string longDesc = "Attacks may make enemies bleed.\n\nWhile it seems like a redundant idea to sharpen a grindstone, it is in fact redundant.";
-
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
-
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;
-
+            return item.PickupObjectId;
         }
+
         private SwordtressBleedingEffect bleedingEffect = new SwordtressBleedingEffect
         {
             DamagePerSecondToEnemies = 5,

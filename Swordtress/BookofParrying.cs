@@ -11,7 +11,7 @@ namespace Swordtress
 {
     class BookOfParrying : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string ItemName = "Book of Parrying";
             string SpriteDirectory = "Swordtress/Resources/BookofParry.png";
@@ -23,6 +23,7 @@ namespace Swordtress
             "A book made by the legendary swordsman, containing only a single chapter and a few pages. Each page contains a single, giant letter that reads: 'learn to parry you fool!' and a smiley on the last page. Well, that's not exactly helpful, is it?";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             item.quality = PickupObject.ItemQuality.B;
+            return item.PickupObjectId;
         }
         public override void Pickup(PlayerController player)
         {

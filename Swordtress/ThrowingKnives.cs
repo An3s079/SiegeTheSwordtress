@@ -10,7 +10,7 @@ namespace Swordtress
 {
     class ThrowingKnives : AdvancedGunBehaviour
     {
-        public static void Add()
+        public static int Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Throwing Knives", "throwingknives");
             Game.Items.Rename("outdated_gun_mods:throwing_knives", "sts:throwing_knives");
@@ -44,6 +44,7 @@ namespace Swordtress
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             projectile.shouldRotate = true;
             projectile.angularVelocity = 400;
+            return gun.PickupObjectId;
         }
 
         public override void OnPostFired(PlayerController player, Gun gun)

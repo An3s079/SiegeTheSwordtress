@@ -8,7 +8,7 @@ namespace Swordtress
 {
     class RoyalGuardsKnife : AdvancedGunBehaviour
     {
-        public static void Add()
+        public static int Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Royal Guard's Knife", "royal_guard's_knife");
             Game.Items.Rename("outdated_gun_mods:royal_guard's_knife", "sts:royal_guard's_knife");
@@ -31,7 +31,7 @@ namespace Swordtress
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.SetBaseMaxAmmo(350);
             gun.barrelOffset.transform.localPosition = new Vector3(0.75f, 0f, 0f);
-            gun.quality = PickupObject.ItemQuality.EXCLUDED;
+            gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "Fuckfuckfuckfuckpleaseworkpleasefuckingworkpleasepleasework.";
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.NONE;
@@ -53,6 +53,7 @@ namespace Swordtress
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton, 1);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc, 1);
+            return gun.PickupObjectId;
         }
         
         private bool HasReloaded;

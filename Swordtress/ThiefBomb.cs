@@ -10,7 +10,8 @@ namespace Swordtress
 {
     class ThiefBomb : PlayerItem
     {
-        public static void Init()
+
+        public static int Init()
         {
             string itemName = "Thieves Bomb";
             string resourceName = "Swordtress/Resources/ThiefBomb.png";
@@ -22,6 +23,7 @@ namespace Swordtress
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 35f);
             item.quality = PickupObject.ItemQuality.EXCLUDED;
+            return item.PickupObjectId;
         }
 
         protected override void DoEffect(PlayerController user)
@@ -36,6 +38,9 @@ namespace Swordtress
             bool flag = component != null;
             if (flag)
             {
+                GameObject obj = new GameObject(itemName);
+                var item = obj.AddComponent<ThiefBomb>();
+                component.sprite = item.sprite;
                 component.Owner = user;
                 component.Shooter = user.specRigidbody;
                 component.OnDestruction += this.HandleDestruction;

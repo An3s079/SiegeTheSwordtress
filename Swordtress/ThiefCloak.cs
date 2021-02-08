@@ -10,7 +10,7 @@ namespace Swordtress
 {
     class ThiefCloak : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "Thieves Cloak";
             string resourceName = "Swordtress/Resources/ThiefCloak.png";
@@ -22,6 +22,7 @@ namespace Swordtress
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 1);
             item.quality = PickupObject.ItemQuality.EXCLUDED;
+            return item.PickupObjectId;
         }
 
         private bool isStealth;

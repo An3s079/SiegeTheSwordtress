@@ -9,7 +9,7 @@ namespace Swordtress
 {
     class CritItem : PassiveItem
     {
-            public static void Init()
+            public static int Init()
             {
                 string itemName = "Berserkers Brew";
                 string resourceName = "Swordtress/Resources/berserkers_brew.png";
@@ -21,6 +21,7 @@ namespace Swordtress
                 "Sadly, decades of sitting untouched have caused it to be a mere sliver of its former glory, with its increased strength being unpredictable.";
                 ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
                 item.quality = ItemQuality.C;
+                return item.PickupObjectId;
             }
 
             public override void Pickup(PlayerController player)

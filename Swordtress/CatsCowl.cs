@@ -8,7 +8,7 @@ namespace Swordtress
 {
     class CatsCowl : PegasusBootsItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "Black Cats Cowl";
             string resourceName = "Swordtress/Resources/black_cats_cowl.png";
@@ -20,6 +20,7 @@ namespace Swordtress
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             item.AddPassiveStatModifier(PlayerStats.StatType.DodgeRollSpeedMultiplier, 1.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;
+            return item.PickupObjectId;
         }
     }
 }

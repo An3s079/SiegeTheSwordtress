@@ -10,25 +10,19 @@ namespace Swordtress
 {
     class Bladelust : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "Bladelust";
-
             string resourceName = "Swordtress/Resources/blade_lust.png";
-
             GameObject obj = new GameObject(itemName);
-
             var item = obj.AddComponent<Bladelust>();
-
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
             string shortDesc = "You're Mine!";
             string longDesc = "Killing an enemy provides a damage up to your next attack.\n\nThis curse incurs an unstoppable lust for combat in those who recieve it.";
-
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
-
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;
+            return item.PickupObjectId;
         }
         private void KillBoost(PlayerController player)
         {

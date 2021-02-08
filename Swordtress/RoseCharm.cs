@@ -13,7 +13,7 @@ namespace Swordtress
 {
     class RoseCharm : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "rose charm";
             string resourceName = "Swordtress/Resources/rose.png";
@@ -24,6 +24,7 @@ namespace Swordtress
             string longDesc = "no one wants to hit a beatiful rose. enemies that try to hit you have a 50% chance to be charmed instead.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             item.quality = PickupObject.ItemQuality.A;
+            return item.PickupObjectId;
         }
         public override void Pickup(PlayerController player)
         {

@@ -8,7 +8,7 @@ namespace Swordtress
 {
     class Katana : AdvancedGunBehaviour
     {
-        public static void Add()
+        public static int Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Ancient Katana", "ancient_katana");
             Game.Items.Rename("outdated_gun_mods:ancient_katana", "sts:ancient_katana");
@@ -47,7 +47,7 @@ namespace Swordtress
             slashingBehaviour.SlashDimensions = 135;
             slashingBehaviour.SlashRange = 5f;
             slashingBehaviour.delayBeforeSlash = .1f;
-            
+
 
             projectile2.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
@@ -79,16 +79,17 @@ namespace Swordtress
             {
                 chargeProjectile1,
                 chargeProjectile2
-               
+
             };
-            VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("katanaslice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003",}, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
-                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero}, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor});
+            VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("katanaslice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003", }, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
+                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0 }, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor });
             slashingBehaviour.SlashVFX = SlashVFX;
             slashingBehaviour2.SlashVFX = SlashVFX;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton, 1);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc, 1);
-            
+            return gun.PickupObjectId;
+
         }
 
         private bool HasReloaded;
@@ -118,7 +119,7 @@ namespace Swordtress
                 HasReloaded = false;
                 AkSoundEngine.PostEvent("Stop_WPN_All", base.gameObject);
                 base.OnReloadPressed(player, gun, bSOMETHING);
-                
+
             }
         }
 

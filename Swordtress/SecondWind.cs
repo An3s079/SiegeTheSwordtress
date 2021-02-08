@@ -11,24 +11,19 @@ namespace Swordtress
 {
     class SecondWind : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             string itemName = "Second Wind";
-
             string resourceName = "Swordtress/Resources/second_wind.png";
-
             GameObject obj = new GameObject(itemName);
-
             var item = obj.AddComponent<SecondWind>();
-
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
             string shortDesc = "For The Fallen!";
             string longDesc = "Entering a room with a boss in it grants the player 1 armor.\n\nWhen the Knight was needed most, he froze up. Never again will he stand by and watch others die.";
-
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;
+            return item.PickupObjectId;
         }
         private bool GaveArmor = false;
         private void TestForBoss()

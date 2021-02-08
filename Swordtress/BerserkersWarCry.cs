@@ -13,7 +13,7 @@ namespace Swordtress
 {
     class BerserkersWarCry : PassiveItem
     {
-        public static void Init()
+        public static int Init()
         {
             System.Random rand = new System.Random();
             string itemName = "Berserkers war cry";
@@ -25,6 +25,7 @@ namespace Swordtress
             string longDesc = "50% chance to terrify enemies when you kill an enemy";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "sts");
             item.quality = PickupObject.ItemQuality.C;
+            return item.PickupObjectId;
         }
         public override void Pickup(PlayerController player)
         {
