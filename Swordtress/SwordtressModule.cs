@@ -46,6 +46,7 @@ namespace Swordtress
                 weapons
                 */
                 stsItemIds.Add(Katana.Add());
+                stsItemIds.Add(DyingPan.Add());
                 stsItemIds.Add(RoyalGuardsKnife.Add());
                 stsItemIds.Add(ThrowingKnives.Add());
 
