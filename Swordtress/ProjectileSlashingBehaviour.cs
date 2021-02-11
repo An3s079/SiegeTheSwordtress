@@ -13,7 +13,7 @@ namespace Swordtress
         {
             DestroyBaseAfterFirstSlash = true;
             timeBetweenSlashes = 1;
-            DoSound = true;
+            DoSound = true; 
             slashKnockback = 5;
             SlashDamage = 15;
             SlashBossMult = 1;
@@ -27,10 +27,14 @@ namespace Swordtress
             soundToPlay = "Play_WPN_blasphemy_shot_01";
             DoesMultipleSlashes = false;
             UsesAngleVariance = false;
-            MinSlashAngleOffset = 1;
+            MinSlashAngleOffset = 1; 
             MaxSlashAngleOffset = 4;
             delayBeforeSlash = 0;
+            AppliesStun = false;
+            StunApplyChance = 0;
+            StunTime = 0;
         }
+
         private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
@@ -38,6 +42,16 @@ namespace Swordtress
             this.m_projectile.sprite.renderer.enabled = false;
             this.m_projectile.collidesWithEnemies = false;
             this.m_projectile.UpdateCollisionMask();
+            Projectile proj = this.m_projectile;
+
+            effects.AddRange(proj.statusEffectsToApply);
+            if (proj.AppliesFire && UnityEngine.Random.value <= proj.FireApplyChance) effects.Add(proj.fireEffect);
+            if (proj.AppliesCharm && UnityEngine.Random.value <= proj.CharmApplyChance) effects.Add(proj.charmEffect);
+            if (proj.AppliesCheese && UnityEngine.Random.value <= proj.CheeseApplyChance) effects.Add(proj.cheeseEffect);
+            if (proj.AppliesBleed && UnityEngine.Random.value <= proj.BleedApplyChance) effects.Add(proj.bleedEffect);
+            if (proj.AppliesFreeze && UnityEngine.Random.value <= proj.FreezeApplyChance) effects.Add(proj.freezeEffect);
+            if (proj.AppliesPoison && UnityEngine.Random.value <= proj.PoisonApplyChance) effects.Add(proj.healthEffect);
+            if (proj.AppliesSpeedModifier && UnityEngine.Random.value <= proj.SpeedApplyChance) effects.Add(proj.speedEffect);
             if (this.m_projectile)
             {
                 if (doSpinAttack)
@@ -63,6 +77,7 @@ namespace Swordtress
 
 
         }
+                    List<GameActorEffect> effects = new List<GameActorEffect>();
         private IEnumerator DoSlash(float angle, float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -82,7 +97,8 @@ namespace Swordtress
             {
                 angle += UnityEngine.Random.Range(MinSlashAngleOffset, MaxSlashAngleOffset);
             }
-            SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, this.m_projectile.statusEffectsToApply, null, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
+            SlashDoer.GrabBoolsAndValuesAndShitForTheFuckingSlashingApplyEffect(AppliesStun, StunApplyChance, StunTime);
+            SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, effects, null, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
             if (DoSound) AkSoundEngine.PostEvent(soundToPlay, this.m_projectile.gameObject);
             SlashVFX.SpawnAtPosition(this.m_projectile.specRigidbody.UnitCenter, this.m_projectile.Direction.ToAngle() + angle, null, null, null, -0.05f);
             if (DestroyBaseAfterFirstSlash) Suicide();
@@ -108,6 +124,7 @@ namespace Swordtress
                 {
                     angle += UnityEngine.Random.Range(MinSlashAngleOffset, MaxSlashAngleOffset);
                 }
+                SlashDoer.GrabBoolsAndValuesAndShitForTheFuckingSlashingApplyEffect(AppliesStun, StunApplyChance, StunTime);
                 SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, this.m_projectile.statusEffectsToApply, null, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
                 if (DoSound) AkSoundEngine.PostEvent(soundToPlay, this.m_projectile.gameObject);
                 SlashVFX.SpawnAtPosition(this.m_projectile.specRigidbody.UnitCenter, this.m_projectile.Direction.ToAngle() + angle, null, null, null, -0.05f);
@@ -115,6 +132,10 @@ namespace Swordtress
             }
             Suicide();
             yield break;
+        }
+        private void ApplyOnHitEffects()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
         }
         private void Suicide() { UnityEngine.Object.Destroy(this.m_projectile.gameObject); }
         private float timer;
@@ -206,7 +227,20 @@ namespace Swordtress
         /// Determines how much time is between each slash in a burst
         /// </summary>
         public float DelayBetweenMultiSlashes;
+        /// <summary>
+        /// Determines whether or not the slash applies stun
+        /// </summary>
+        public bool AppliesStun;
+        /// <summary>
+        /// Chance for freezing enemies if AppliesStun is set to true.
+        /// </summary>
+        public float StunApplyChance;
+        /// <summary>
+        /// Amount of time enemies are stunned.
+        /// </summary>
+        public float StunTime;
         private Projectile m_projectile;
         private PlayerController owner;
+
     }
 }

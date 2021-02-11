@@ -13,7 +13,7 @@ namespace Swordtress
 {
     public class SlashDoer
     {
-       
+ 
 
         public static void DoSwordSlash(Vector2 position, float angle, PlayerController owner, float playerKnockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockbackForce, List<GameActorEffect> statusEffects, Transform parentTransform = null, float jammedDamageMult = 1, float bossDamageMult = 1, float SlashRange = 2.5f, float SlashDimensions = 90f)
         {
@@ -199,6 +199,13 @@ namespace Swordtress
                 if (targetEnemy.healthHaver.IsBoss) damageToDeal *= bossDMGMult;
                 if (targetEnemy.IsBlackPhantom) damageToDeal *= jammedDMGMult;
                 targetEnemy.healthHaver.ApplyDamage(damageToDeal, contact - arcOrigin, owner.ActorName, CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
+                if(appliesStun == true)
+                {
+                    if(UnityEngine.Random.value <= stunApplyChance)
+                    {
+                        targetEnemy.behaviorSpeculator.Stun(stunTime, true);
+                    }
+                }
             }
             if (targetEnemy.knockbackDoer)
             {
@@ -213,7 +220,19 @@ namespace Swordtress
             }
             return damage;
         }
+        static bool appliesStun;
+        static float stunApplyChance;
+        static float stunTime;
+
+        //this is probably bad but this is the best way i could find ok, get off my back.
+        public static void GrabBoolsAndValuesAndShitForTheFuckingSlashingApplyEffect( bool AppliesStun, float StunApplyChance, float StunTime) 
+        {
+            appliesStun = AppliesStun;
+            stunApplyChance = StunApplyChance;
+            stunTime = StunTime;
+        }
     }
+
     public static class Logic
     {
         public static bool IsBetweenRange(this float numberToCheck, float bottom, float top)
@@ -221,4 +240,5 @@ namespace Swordtress
             return (numberToCheck >= bottom && numberToCheck <= top);
         }
     }
+
 }
