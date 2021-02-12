@@ -44,12 +44,11 @@ namespace Swordtress
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage = 6.5f;
-            ETGModConsole.Log($"{projectile.baseData.damage}");
             projectile.AppliesFire = true;
             projectile.FireApplyChance = 0.35f;
             projectile.fireEffect = Gungeon.Game.Items["hot_lead"].GetComponent<BulletStatusEffectItem>().FireModifierEffect;
             VFXPool PanSlashVFX = VFXLibrary.CreateMuzzleflash("royal_guard's_knife_slash", new List<string> { "royal_guard's_knife_slash_001", "royal_guard's_knife_slash_002", "royal_guard's_knife_slash_003", "royal_guard's_knife_slash_004", }, 10, new List<IntVector2> { new IntVector2(23, -5), new IntVector2(23, -5), new IntVector2(23, -5), new IntVector2(23, -5), }, new List<tk2dBaseSprite.Anchor> {
-                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { new Vector2(5, 0), new Vector2(5, 0), new Vector2(5, 0), new Vector2(5, 0), }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0, 0 }, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, });
+                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0, 0 }, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, });
 
             ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
             slashingBehaviour.SlashVFX = PanSlashVFX;

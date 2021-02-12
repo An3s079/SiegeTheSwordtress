@@ -5,10 +5,12 @@ using System.Text;
 using UnityEngine;
 using Gungeon;
 using System.Collections;
+
 namespace Swordtress
 {
     public class ProjectileSlashingBehaviour : MonoBehaviour
     {
+
         public ProjectileSlashingBehaviour()
         {
             DestroyBaseAfterFirstSlash = true;
@@ -33,7 +35,7 @@ namespace Swordtress
             AppliesStun = false;
             StunApplyChance = 0;
             StunTime = 0;
-        }
+        } 
 
         private void Start()
         {
@@ -54,6 +56,7 @@ namespace Swordtress
             if (proj.AppliesSpeedModifier && UnityEngine.Random.value <= proj.SpeedApplyChance) effects.Add(proj.speedEffect);
             if (this.m_projectile)
             {
+
                 if (doSpinAttack)
                 {
                     DestroyBaseAfterFirstSlash = false;
@@ -77,55 +80,61 @@ namespace Swordtress
 
 
         }
-                    List<GameActorEffect> effects = new List<GameActorEffect>();
+        
+        public List<GameActorEffect> effects = new List<GameActorEffect>();
         private IEnumerator DoSlash(float angle, float delay)
         {
+
             yield return new WaitForSeconds(delay);
-            float actDamage = this.SlashDamage;
-            float actKnockback = this.slashKnockback;
-            float bossDMGMult = this.SlashBossMult;
-            float jammedDMGMult = this.SlashJammedMult;
 
             if (SlashDamageUsesBaseProjectileDamage)
             {
-                actDamage = this.m_projectile.baseData.damage;
-                bossDMGMult = this.m_projectile.BossDamageMultiplier;
-                jammedDMGMult = this.m_projectile.BlackPhantomDamageMultiplier;
-                actKnockback = this.m_projectile.baseData.force;
+                SlashDamage = this.m_projectile.baseData.damage;
+                SlashBossMult = this.m_projectile.BossDamageMultiplier;
+                SlashJammedMult = this.m_projectile.BlackPhantomDamageMultiplier;
+                slashKnockback = this.m_projectile.baseData.force;
             }
             if (UsesAngleVariance)
             {
                 angle += UnityEngine.Random.Range(MinSlashAngleOffset, MaxSlashAngleOffset);
             }
+            ProjectileSlashingBehaviour slash = this.GetComponent<ProjectileSlashingBehaviour>();
+            if (slash != null)//just to be safe, who knows what stupid shit could possibly happen. i literally cant think of any way it would ever be null.
+            {
+                SlashDoer.HearYeAllIfTheeBeListeningAndHopingToRunnethThyPostProcessSlashCodeNowIsThinesTimeToRunItForThePlayerIsAboutToSlash(GameManager.Instance.PrimaryPlayer, slash);
+            }
             SlashDoer.GrabBoolsAndValuesAndShitForTheFuckingSlashingApplyEffect(AppliesStun, StunApplyChance, StunTime);
-            SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, effects, null, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
+            SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, SlashDamage, slashKnockback, effects, null, SlashJammedMult, SlashBossMult, SlashRange, SlashDimensions);
             if (DoSound) AkSoundEngine.PostEvent(soundToPlay, this.m_projectile.gameObject);
             SlashVFX.SpawnAtPosition(this.m_projectile.specRigidbody.UnitCenter, this.m_projectile.Direction.ToAngle() + angle, null, null, null, -0.05f);
             if (DestroyBaseAfterFirstSlash) Suicide();
+            
             yield break;
         }
         private IEnumerator DoMultiSlash(float angle, float delay, int AmountOfMultiSlashes, float DelayBetweenMultiSlashes)
         {
             yield return new WaitForSeconds(delay);
-            float actDamage = this.SlashDamage;
-            float actKnockback = this.slashKnockback;
-            float bossDMGMult = this.SlashBossMult;
-            float jammedDMGMult = this.SlashJammedMult;
+
             for (int i = 0; i < AmountOfMultiSlashes; i++)
             {
                 if (SlashDamageUsesBaseProjectileDamage)
                 {
-                    actDamage = this.m_projectile.baseData.damage;
-                    bossDMGMult = this.m_projectile.BossDamageMultiplier;
-                    jammedDMGMult = this.m_projectile.BlackPhantomDamageMultiplier;
-                    actKnockback = this.m_projectile.baseData.force;
+                    SlashDamage = this.m_projectile.baseData.damage;
+                    SlashBossMult = this.m_projectile.BossDamageMultiplier;
+                    SlashJammedMult = this.m_projectile.BlackPhantomDamageMultiplier;
+                    slashKnockback = this.m_projectile.baseData.force;
                 }
                 if (UsesAngleVariance)
                 {
                     angle += UnityEngine.Random.Range(MinSlashAngleOffset, MaxSlashAngleOffset);
                 }
+                ProjectileSlashingBehaviour slash = this.GetComponent<ProjectileSlashingBehaviour>();
+                if (slash != null)//just to be safe, who knows what stupid shit could possibly happen. i literally cant think of any way it would ever be null.
+                {
+                    SlashDoer.HearYeAllIfTheeBeListeningAndHopingToRunnethThyPostProcessSlashCodeNowIsThinesTimeToRunItForThePlayerIsAboutToSlash(GameManager.Instance.PrimaryPlayer, slash);
+                }
                 SlashDoer.GrabBoolsAndValuesAndShitForTheFuckingSlashingApplyEffect(AppliesStun, StunApplyChance, StunTime);
-                SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, this.m_projectile.statusEffectsToApply, null, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
+                SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, SlashDamage, slashKnockback, this.m_projectile.statusEffectsToApply, null, SlashJammedMult, SlashBossMult, SlashRange, SlashDimensions);
                 if (DoSound) AkSoundEngine.PostEvent(soundToPlay, this.m_projectile.gameObject);
                 SlashVFX.SpawnAtPosition(this.m_projectile.specRigidbody.UnitCenter, this.m_projectile.Direction.ToAngle() + angle, null, null, null, -0.05f);
                 yield return new WaitForSeconds(DelayBetweenMultiSlashes);

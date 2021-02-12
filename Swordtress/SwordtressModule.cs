@@ -49,6 +49,7 @@ namespace Swordtress
                 stsItemIds.Add(DyingPan.Add());
                 stsItemIds.Add(RoyalGuardsKnife.Add());
                 stsItemIds.Add(ThrowingKnives.Add());
+                stsItemIds.Add(Zenith.Add());
 
                 for (int i = 0; i < stsItemIds.Count; i++)
                 {
