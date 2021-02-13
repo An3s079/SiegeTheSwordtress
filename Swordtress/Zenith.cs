@@ -31,8 +31,9 @@ namespace Swordtress
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.1f;
             gun.DefaultModule.cooldownTime = 0.06f;
-            gun.DefaultModule.numberOfShotsInClip = -1;
-            gun.SetBaseMaxAmmo(800);
+            gun.DefaultModule.numberOfShotsInClip = int.MaxValue;
+            gun.CurrentAmmo = 2000;
+            gun.SetBaseMaxAmmo(2000);
 
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "'xilucvvvvvvvvvvvvvvvvvvhriorjboiuhbnribb  hjk gbjhfg bf f dkfjnsdkjvdfiuvd' -spcreat, 2020";
