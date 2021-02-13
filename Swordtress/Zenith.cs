@@ -17,8 +17,8 @@ namespace Swordtress
             Game.Items.Rename("outdated_gun_mods:zenith", "sts:zenith");
             gun.gameObject.AddComponent<Zenith>();
 
-            gun.SetShortDescription("short desc");
-            gun.SetLongDescription("long desc");
+            gun.SetShortDescription("Extreme Power.");
+            gun.SetLongDescription("The most powerful sword of another world has moved itself to the swordtress, ready to crush any who stand in its waya again.");
 
             gun.SetupSprite(null, "zenith_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 2);
@@ -78,7 +78,7 @@ namespace Swordtress
                 pierceProjModifier.penetration = int.MaxValue;
             }
             projectile.IgnoreTileCollisionsFor(10f);
-            projectile.OverrideMotionModule = new ZenithProjectile(ResourceExtractor.GetTextureFromResource("ExampleMod/Resources/squaregrad.png"));
+            projectile.OverrideMotionModule = new ZenithProjectile(ResourceExtractor.GetTextureFromResource("Swordtress/Resources/squaregrad.png"));
 
             var rot = projectile.Owner.FacingDirection + 180f;
             projectile.transform.eulerAngles = new Vector3(0f, 0f, rot);
