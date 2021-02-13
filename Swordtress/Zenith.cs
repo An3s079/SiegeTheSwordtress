@@ -18,7 +18,7 @@ namespace Swordtress
             gun.gameObject.AddComponent<Zenith>();
 
             gun.SetShortDescription("Extreme Power.");
-            gun.SetLongDescription("The most powerful sword of another world has moved itself to the swordtress, ready to crush any who stand in its waya again.");
+            gun.SetLongDescription("The most powerful sword of another world has moved itself to the swordtress, ready to crush any who stand in its way.");
 
             gun.SetupSprite(null, "zenith_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 2);
