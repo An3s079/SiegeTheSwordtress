@@ -13,13 +13,22 @@ namespace Swordtress
 {
     public class SlashDoer
     {
- 
 
-        public static void DoSwordSlash(Vector2 position, float angle, PlayerController owner, float playerKnockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockbackForce, List<GameActorEffect> statusEffects, Transform parentTransform = null, float jammedDamageMult = 1, float bossDamageMult = 1, float SlashRange = 2.5f, float SlashDimensions = 90f)
+        public delegate void SlashEndHandler(PlayerController player);
+        public static event SlashEndHandler OnSlashEnded;
+
+
+        public delegate void SlashHitHandler(PlayerController player, AIActor enemy);
+        public static event SlashHitHandler OnHitEnemyWithSlash;
+
+        public delegate void PostProcessSlashHandler(PlayerController player, ProjectileSlashingBehaviour slash);
+        public static event PostProcessSlashHandler PostProcessSlash;
+
+        public static void DoSwordSlash( Vector2 position, float angle, PlayerController owner, float playerKnockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockbackForce, List<GameActorEffect> statusEffects, Transform parentTransform = null, float jammedDamageMult = 1, float bossDamageMult = 1, float SlashRange = 2.5f, float SlashDimensions = 90f)
         {
             GameManager.Instance.StartCoroutine(HandleSlash(position, angle, owner, playerKnockbackForce, intmode, damageToDeal, enemyKnockbackForce, statusEffects, jammedDamageMult, bossDamageMult, SlashRange, SlashDimensions));
         }
-        private static IEnumerator HandleSlash(Vector2 position, float angle, PlayerController owner, float knockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult, float SlashRange, float SlashDimensions)
+        private static IEnumerator HandleSlash( Vector2 position, float angle, PlayerController owner, float knockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult, float SlashRange, float SlashDimensions)
         {
             int slashId = Time.frameCount;
             List<SpeculativeRigidbody> alreadyHit = new List<SpeculativeRigidbody>();
@@ -28,10 +37,13 @@ namespace Swordtress
             while (ela < 0.2f)
             {
                 ela += BraveTime.DeltaTime;
-                HandleHeroSwordSlash(alreadyHit, position, angle, slashId, owner, intmode, damageToDeal, enemyKnockback, statusEffects, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
+                HandleHeroSwordSlash( alreadyHit, position, angle, slashId, owner, intmode, damageToDeal, enemyKnockback, statusEffects, jammedDMGMult, bossDMGMult, SlashRange, SlashDimensions);
                 yield return null;
             }
+            if (OnSlashEnded != null)
+                OnSlashEnded(GameManager.Instance.PrimaryPlayer);
             yield break;
+            
         }
         public enum ProjInteractMode
         {
@@ -72,7 +84,6 @@ namespace Swordtress
         }
         private static void HandleHeroSwordSlash(List<SpeculativeRigidbody> alreadyHit, Vector2 arcOrigin, float slashAngle, int slashId, PlayerController owner, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult, float slashRange, float slashDimensions)
         {
-            
             ReadOnlyCollection<Projectile> allProjectiles2 = StaticReferenceManager.AllProjectiles;
             for (int j = allProjectiles2.Count - 1; j >= 0; j--)
             {
@@ -195,6 +206,10 @@ namespace Swordtress
         {
             if (targetEnemy.healthHaver)
             {
+                GameObject gameObject = owner.CurrentGun.gameObject;
+                    if (OnHitEnemyWithSlash != null)
+                        OnHitEnemyWithSlash(owner, targetEnemy);
+                
                 float damageToDeal = damage;
                 if (targetEnemy.healthHaver.IsBoss) damageToDeal *= bossDMGMult;
                 if (targetEnemy.IsBlackPhantom) damageToDeal *= jammedDMGMult;
@@ -230,6 +245,12 @@ namespace Swordtress
             appliesStun = AppliesStun;
             stunApplyChance = StunApplyChance;
             stunTime = StunTime;
+        }
+
+        public static void HearYeAllIfTheeBeListeningAndHopingToRunnethThyPostProcessSlashCodeNowIsThinesTimeToRunItForThePlayerIsAboutToSlash(PlayerController player, ProjectileSlashingBehaviour slash)
+        {
+            if (PostProcessSlash != null)
+                PostProcessSlash(player, slash);
         }
     }
 
